@@ -1,0 +1,155 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    min-height: 100dvh;
+    transition: background 0.6s ease, background-image 0.6s ease, color 0.6s ease;
+  }
+
+  
+  @media (max-width: 400px) {
+    .weather-card { padding: 10px 14px !important; gap: 8px !important; }
+    .weather-temp { font-size: 1.1rem !important; }
+    .weather-divider { height: 24px; }
+    .theme-toggle { top: 12px; left: 12px; width: 54px; height: 30px; }
+    .toggle-knob { width: 24px; height: 24px; font-size: 13px; }
+    .light .toggle-knob { transform: translateX(24px); }
+  }
+  @media (min-width: 401px) and (max-width: 640px) {
+    .weather-card { padding: 12px 18px !important; }
+  }
+  @media (min-width: 1200px) {
+    .weather-card { padding: 16px 32px !important; }
+    .weather-temp { font-size: 1.6rem !important; }
+  }
+
+  
+  body {
+    background: #000a14;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(0,60,120,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(60,0,120,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 90%, rgba(0,80,80,0.15) 0%, transparent 50%);
+    color: #fff;
+  }
+
+  
+  .light body, :root.light body {
+    background: #f0f4fa;
+    background-image:
+      radial-gradient(ellipse at 25% 40%, rgba(100,180,255,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 25%, rgba(200,140,255,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 85%, rgba(100,220,200,0.1) 0%, transparent 50%);
+    color: #1a1a2e;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+  @keyframes weatherPulse {
+    0%, 100% { box-shadow: var(--wp-shadow1); }
+    50% { box-shadow: var(--wp-shadow2); }
+  }
+  :root {
+    --wp-shadow1: 0 0 15px rgba(0,255,255,0.08), inset 0 0 15px rgba(0,255,255,0.03);
+    --wp-shadow2: 0 0 25px rgba(0,255,255,0.15), inset 0 0 20px rgba(0,255,255,0.05);
+  }
+  :root.light {
+    --wp-shadow1: 0 4px 20px rgba(0,80,120,0.08), inset 0 0 12px rgba(255,255,255,0.4);
+    --wp-shadow2: 0 6px 28px rgba(0,80,120,0.12), inset 0 0 16px rgba(255,255,255,0.5);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  
+  .weather-card {
+    background: linear-gradient(135deg, rgba(0,255,255,0.06) 0%, rgba(120,0,255,0.04) 50%, rgba(0,20,40,0.6) 100%);
+    border: 1px solid rgba(0,255,255,0.12);
+    border-radius: 16px;
+    padding: 14px 24px;
+    backdrop-filter: blur(12px);
+    animation: weatherPulse 4s ease-in-out infinite, fadeInUp 0.8s ease-out;
+    transition: background 0.5s, border-color 0.5s;
+  }
+  .light .weather-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(220,235,255,0.6) 50%, rgba(240,230,255,0.5) 100%);
+    border-color: rgba(0,120,180,0.18);
+  }
+  .weather-divider {
+    width: 1px; height: 32px;
+    background: linear-gradient(to bottom, transparent, rgba(0,255,255,0.3), transparent);
+    transition: background 0.5s;
+  }
+  .light .weather-divider {
+    background: linear-gradient(to bottom, transparent, rgba(0,100,160,0.25), transparent);
+  }
+  .weather-temp {
+    font-size: 1.4rem; font-weight: bold;
+    background: linear-gradient(135deg, rgba(0,255,255,1), rgba(120,200,255,0.9));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(0,255,255,0.4));
+    transition: filter 0.5s;
+  }
+  .light .weather-temp {
+    background: linear-gradient(135deg, #006a8a, #4455aa);
+    -webkit-background-clip: text;
+    filter: drop-shadow(0 0 3px rgba(0,80,140,0.2));
+  }
+
+  
+  #dateStr { transition: color 0.5s, text-shadow 0.5s; }
+  .light #dateStr { color: rgba(0,80,130,0.7) !important; text-shadow: none !important; }
+
+  
+  #timeStr { transition: color 0.5s, text-shadow 0.5s; }
+  .light #timeStr {
+    color: #1a3a5c !important;
+    text-shadow: 0 1px 3px rgba(0,60,120,0.15) !important;
+  }
+
+  
+  #weatherCondition { transition: color 0.5s, text-shadow 0.5s; }
+  .light #weatherCondition { color: rgba(0,80,130,0.75) !important; text-shadow: none !important; }
+  #weatherCity { transition: color 0.5s; }
+  .light #weatherCity { color: rgba(100,70,160,0.7) !important; }
+
+  
+  .ambient-glow { transition: background 0.5s; }
+  .light .ambient-glow {
+    background: radial-gradient(circle, rgba(0,120,200,0.06) 0%, rgba(140,80,220,0.03) 40%, transparent 70%) !important;
+  }
+
+  
+  .theme-toggle {
+    position: fixed; top: 20px; left: 20px; z-index: 100;
+    width: 64px; height: 34px; border-radius: 999px; border: none;
+    cursor: pointer; padding: 3px;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+    background: linear-gradient(135deg, #0a1628, #1a0a30);
+    box-shadow: 0 0 12px rgba(0,255,255,0.15), inset 0 0 8px rgba(0,0,0,0.4);
+    outline: none;
+  }
+  .theme-toggle:hover { box-shadow: 0 0 20px rgba(0,255,255,0.3), inset 0 0 8px rgba(0,0,0,0.4); transform: scale(1.05); }
+  .light .theme-toggle {
+    background: linear-gradient(135deg, #d4e4f4, #e8d8f0);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08), inset 0 0 6px rgba(255,255,255,0.6);
+  }
+  .light .theme-toggle:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.12), inset 0 0 6px rgba(255,255,255,0.6); }
+  .toggle-knob {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+    transform: translateX(0);
+    background: radial-gradient(circle at 40% 35%, #1a2a4a, #0a0a20);
+    box-shadow: 0 0 10px rgba(0,255,255,0.3), 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .light .toggle-knob {
+    transform: translateX(30px);
+    background: radial-gradient(circle at 40% 35%, #ffe066, #ffb833);
+    box-shadow: 0 0 14px rgba(255,180,0,0.4), 0 2px 4px rgba(0,0,0,0.15);
+  }

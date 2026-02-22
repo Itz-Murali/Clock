@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title> Live Time & Weather Viewer </title>
+<meta name="description" content="A stunning neon-styled analog clock with real-time weather, date display, and ambient particle effects."/>
+<meta name="keywords" content="neon clock, analog clock, weather widget, live time, digital clock"/>
+<meta name="author" content="Murali"/>
+<meta name="theme-color" content="#000a14"/>
+<meta name="color-scheme" content="dark light"/>
+<meta name="robots" content="index, follow"/>
+<link rel="icon" href="weather.png" type="image/png"/>
+<link rel="apple-touch-icon" href="weather.png"/>
+<meta property="og:title" content=" Clock — Live Time & Weather"/>
+<meta property="og:description" content="A stunning neon-styled analog clock with real-time weather, date display, and ambient particle effects."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="weather.png"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=" Clock — Live Time & Weather"/>
+<meta name="twitter:description" content="A stunning neon-styled analog clock with real-time weather and particle effects."/>
+<meta name="twitter:image" content="weather.png"/>
+<link rel="stylesheet" href="c.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark theme">
+  <div class="toggle-knob" id="toggleKnob">🌙</div>
+</button>
+
+<div class="flex flex-col items-center justify-center relative" style="min-height:100vh;min-height:100dvh;gap:clamp(0.5rem,2vw,1.25rem);padding:1rem">
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none" style="z-index:0"></canvas>
+
+  <div class="relative flex flex-col items-center justify-center" style="z-index:1">
+    <div class="ambient-glow absolute rounded-full pointer-events-none" style="width:140%;height:140%;background:radial-gradient(circle,rgba(0,255,255,0.04) 0%,rgba(120,0,255,0.02) 40%,transparent 70%);animation:breathe 4s ease-in-out infinite"></div>
+    <div class="relative">
+      <canvas id="clockCanvas" class="block"></canvas>
+      <div class="absolute left-1/2 -translate-x-1/2 text-center pointer-events-none select-none" style="bottom:26%">
+        <span id="dateStr" class="text-xs sm:text-sm tracking-[0.2em] uppercase font-light" style="color:rgba(0,255,255,0.65);text-shadow:0 0 8px rgba(0,255,255,0.3);font-family:'Courier New',monospace"></span>
+      </div>
+    </div>
+    <div id="timeStr" class="select-none" style="margin-top:clamp(0.5rem,2vw,1.5rem);font-family:'Courier New',monospace;font-size:clamp(1rem,3.5vw,2rem);letter-spacing:clamp(0.15em,1vw,0.3em);color:rgba(0,255,255,0.85);text-shadow:0 0 10px rgba(0,255,255,0.5),0 0 30px rgba(0,255,255,0.2),0 0 60px rgba(180,100,255,0.1)"></div>
+  </div>
+
+  <div id="weatherWidget" class="weather-card flex items-center gap-4 select-none" style="z-index:1;font-family:'Courier New',monospace;display:none">
+    <span id="weatherIcon" class="text-3xl sm:text-4xl" style="filter:drop-shadow(0 0 10px rgba(0,255,255,0.35))"></span>
+    <div class="weather-divider"></div>
+    <div class="flex flex-col gap-0.5">
+      <span id="weatherTemp" class="weather-temp tracking-wider"></span>
+      <span id="weatherCondition" class="text-xs tracking-[0.15em] uppercase" style="color:rgba(0,255,255,0.7);text-shadow:0 0 6px rgba(0,255,255,0.2)"></span>
+      <span id="weatherCity" class="text-[10px] tracking-wider" style="color:rgba(180,130,255,0.6)"></span>
+    </div>
+  </div>
+</div>
+
+<script src="a.js"></script>
+</body>
+</html>
